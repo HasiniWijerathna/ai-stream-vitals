@@ -85,4 +85,6 @@ npm test
 
 ## License
 
-MIT
+Licensed under MIT. See [LICENSE](./LICENSE).
+
+Copyright (c) 2026 Hasini Wijerathn
