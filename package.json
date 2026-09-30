@@ -6,10 +6,16 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "repository": {
+  "type": "git",
+  "url": "git+https://github.com/HasiniWijerathna/ai-stream-vitals.git"
+},
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
