@@ -6,3 +6,5 @@ export type {
   StreamSession,
   StreamVitals,
 } from "./types.js";
+export { observeTextStream } from "./observe-stream.js";
+export { observeElement } from "./observe-dom.js";
