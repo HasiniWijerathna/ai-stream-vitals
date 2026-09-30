@@ -16,3 +16,15 @@ session.markSend();
 session.markChunk({ kind: "text", text: "Hello" });
 afterPaint(() => session.markPainted());
 console.log(session.markEnd());
+
+## Demo
+
+A React example lives in examples/demo.
+
+From the repo root:
+
+npm install
+npm run build
+cd examples/demo
+npm install
+npm run dev
