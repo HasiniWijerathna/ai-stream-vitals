@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { createMonitor } from "ai-stream-vitals";
 import type { StreamVitals } from "ai-stream-vitals";
 
-// Fake stream: reasoning first, then text, then a long pause.
+// Fake stream: reasoning first, next text, then a long pause.
 const events = [
   { delay: 400, kind: "reasoning" as const, text: "thinking..." },
   { delay: 800, kind: "text" as const, text: "Hello " },
@@ -23,7 +23,7 @@ export default function App() {
     setText("");
     setMetrics(null);
 
-    // Wait one frame so the empty bubble is in the DOM.
+    // Wait one frame so the empty bubble is in the DOM
     await new Promise<void>((resolve) => {
       requestAnimationFrame(() => resolve());
     });

@@ -17,7 +17,7 @@ export type StreamMonitor = {
 };
 
 // Start tracking a response.
-// Use DOM or stream tracking; using both counts text twice.
+// Use DOM or stream tracking; using both counts text twice
 export function createMonitor(options: MonitorOptions): StreamMonitor {
   const session = createStreamSession(options);
   session.markSend();
@@ -30,13 +30,13 @@ export function createMonitor(options: MonitorOptions): StreamMonitor {
   return {
     session,
 
-    // Read and track the stream without displaying it.
+    // Read and trak the stream without displaying it.
     observeTextStream(stream, streamOptions) {
       return observeTextStream(session, stream, streamOptions);
     },
 
     // Stop watching the DOM and return metrics.
-    // This does not stop an active stream.
+    // This does not stop an active stream
     end() {
       stopDom?.();
       return session.markEnd();
