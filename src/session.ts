@@ -13,8 +13,11 @@ export function createStreamSession(options: SessionOptions): StreamSession {
 
   let sendAt: number | null = null;
   let firstVisibleAt: number | null = null;
+  let paintedAt: number | null = null;
   let usableAt: number | null = null;
   let visibleChars = 0;
+  let toolStartedAt: number | null = null;
+  let toolActiveMs = 0;
   const visibleTimes: number[] = [];
   let lastVisibleAt: number | null = null;
   let stallCount = 0;
@@ -36,7 +39,10 @@ export function createStreamSession(options: SessionOptions): StreamSession {
         sendAt !== null && firstVisibleAt !== null
           ? firstVisibleAt - sendAt
           : null,
-      renderLagMs: null,
+      renderLagMs:
+        firstVisibleAt !== null && paintedAt !== null
+          ? paintedAt - firstVisibleAt
+          : null,
       timeToUsable:
         sendAt !== null && usableAt !== null ? usableAt - sendAt : null,
       chunkCount,
@@ -47,7 +53,7 @@ export function createStreamSession(options: SessionOptions): StreamSession {
       },
       stallCount,
       longestStallMs,
-      toolActiveMs: 0,
+      toolActiveMs,
     };
   }
 
@@ -75,10 +81,22 @@ export function createStreamSession(options: SessionOptions): StreamSession {
       if (input.text) visibleChars += input.text.length;
       if (usableAt === null && visibleChars >= usableChars) usableAt = at;
     },
-    markPainted() {},
-    markToolStart() {},
-    markToolEnd() {},
+    markPainted() {
+      if (paintedAt === null) paintedAt = now();
+    },
+    markToolStart() {
+      if (toolStartedAt === null) toolStartedAt = now();
+    },
+    markToolEnd() {
+      if (toolStartedAt === null) return;
+      toolActiveMs += now() - toolStartedAt;
+      toolStartedAt = null;
+    },
     markEnd() {
+      if (toolStartedAt !== null) {
+        toolActiveMs += now() - toolStartedAt;
+        toolStartedAt = null;
+      }
       return snapshot();
     },
     snapshot,
