@@ -80,6 +80,11 @@ npm run dev
 ```bash
 npm test
 ```
+## Limitations
+
+- Use either `element` or `observeTextStream` for one reply. Using both records the same text twice.
+- `observeTextStream` consumes the stream and does not send it to the UI. Split first with `stream.tee()` if the UI also needs the bytes. The unread branch can buffer.
+- `end()` disconnects the DOM observer and returns metrics. It does not cancel `fetch` or the reader, and later `markChunk` calls can still update the session.
 
 ## License
 
