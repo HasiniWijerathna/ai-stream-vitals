@@ -23,13 +23,11 @@ Click Send. You get reasoning first (not shown as visible text), then a stream, 
 
 ## Install
 
-Not on npm yet. Use the repo:
-
 ```bash
-npm install github:HasiniWijerathna/ai-stream-vitals
+npm install ai-stream-vitals
 ```
 
-Or clone and build locally:
+Also on npm: https://www.npmjs.com/package/ai-stream-vitals
 
 ```bash
 git clone https://github.com/HasiniWijerathna/ai-stream-vitals.git
@@ -85,6 +83,4 @@ npm test
 
 ## License
 
-Licensed under MIT. See [LICENSE](./LICENSE).
-
-Copyright (c) 2026 Hasini Wijerathn
+MIT
